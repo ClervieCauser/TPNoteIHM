@@ -29,14 +29,107 @@ import java.util.Map;
 public class Pokemon {
     public static String language;
     private int id;
+
     private Map<String, String> name; //depends of settings language
     private final List<Types> type = new ArrayList<>();
     private Map<String, Integer> base;  //json name is base
-    private String pictureURL;
-    
-    
-    //TODO some methods
 
+    private String pictureURL;
+
+    public String langage;
+
+    private static List<Pokemon> completeList = new ArrayList<>();
+    private static Pokemon instance = null;
+
+    private Pokemon() {
+        // constructeur privé
+    }
+
+    public static Pokemon getInstance() {
+            if (Pokemon.instance == null) {
+                synchronized(Pokemon.class) {
+                    if (Pokemon.instance == null) { Pokemon.instance = new
+                            Pokemon(); }
+                }
+            }
+            return Pokemon.instance;
+    }
+
+    // méthode pour ajouter un pokemon à la liste
+    public static void addPokemon(Pokemon pokemon) {
+        completeList.add(pokemon);
+    }
+
+    // méthode pour accéder à un pokemon dans la liste en fonction de son index
+    public static Pokemon getPokemon(int index) {
+        return completeList.get(index);
+    }
+
+    // méthode pour accéder à un pokemon dans la liste en fonction de son id
+    public static Pokemon getPokemonById(int id) {
+        for (Pokemon pokemon : completeList) {
+            if (pokemon.id == id) {
+                return pokemon;
+            }
+        }
+        return null;
+    }
+
+    public static String getLanguage() {
+        return language;
+    }
+
+    public static void setLanguage(String language) {
+        Pokemon.language = language;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public void setName(Map<String, String> name) {
+        this.name = name;
+    }
+
+    public List<Types> getType() {
+        return type;
+    }
+
+    public Map<String, Integer> getBase() {
+        return base;
+    }
+
+    public void setBase(Map<String, Integer> base) {
+        this.base = base;
+    }
+
+    public String getPictureURL() {
+        return pictureURL;
+    }
+
+    public void setPictureURL(String pictureURL) {
+        this.pictureURL = pictureURL;
+    }
+
+    public String getLangage() {
+        return langage;
+    }
+
+    public void setLangage(String langage) {
+        this.langage = langage;
+    }
+
+    public List<Pokemon> getCompleteList() {
+        return completeList;
+    }
+
+    public void setCompleteList(List<Pokemon> completeList) {
+        this.completeList = completeList;
+    }
 
     /**
     * the best pokemon are those with the highest rank value
@@ -62,7 +155,7 @@ public class Pokemon {
     public static void boost(int boost) {
         completeList.forEach( pokemon -> {
             if(pokemon.type.contains(Types.NORMAL)) {
-                pokemon.base.put(Stats.Speed.toString(), pokemon.base.get(Stats.Speed.toString()) + boost);
+                pokemon.base.put(Stats.SPEED.toString(), pokemon.base.get(Stats.SPEED.toString()) + boost);
             }
         });
     }
@@ -79,7 +172,6 @@ enum Stats {
     SPEED(0);
     private int value;
 
-
     public int getValue() {
         return value;
     }
@@ -87,7 +179,7 @@ enum Stats {
     public void setValue(int value) {
         this.value = value;
     }
-    Bases(int value) {
+    Stats(int value) {
         this.value=value;
     }
 }
