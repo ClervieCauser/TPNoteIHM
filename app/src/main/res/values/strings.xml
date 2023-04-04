@@ -1,3 +1,15 @@
 <resources>
     <string name="app_name">TPNotePokemon</string>
+    <string name="adaptaion">-Adapter</string>
+    <string name="singleton">-Singleton</string>
+    <string name="fragement">-Fragement</string>
+    <string name="observable">-Observer/Observable</string>
+    <string name="butontext">CATCH'EM ALL</string>
+    <string-array name="maliste">
+        <item>english</item>
+        <item>japanese</item>
+        <item>chinese</item>
+        <item>french</item>
+    </string-array>
+
 </resources>
